@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/uploaddata.css' %}">
+{% csrf_token %} 
+<form action="{% url 'uploaddata' %}" method="POST">
+  {% csrf_token %} 
+  <label for="Locality">Locality Name:</label>
+  <input type="text" id="Locality" name="Locality"><br>
+
+  <label for="number">Number:</label>
+  <input type="number" id="number" name="number"><br>
+
+<br>
+
+
+
+  <label for="picture">Picture:</label>
+  <input type="file" id="picture" name="picture">
+   <button type="button" name="get_location_btn"  onclick="getLocation()">Get Location</button>
+  <input type="reset" value="Reset"><br>
+</form>
+
+
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        console.log("Latitude: " + lat + " Longitude: " + lng);
+
+        // Send lat and lng data to your Django server using AJAX
+
+        $.ajax({
+            url: {% url 'uploaddata' %},
+            type: 'POST',
+            data: {
+                lat: lat,
+                lng: lng,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    getLocation();
+</script>
+
+
+{% endblock content %}

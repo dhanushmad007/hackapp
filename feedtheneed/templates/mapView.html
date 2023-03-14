@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="mapid" style="height: 500px;"></div>
+
+{% leaflet_map "mapid" %}
+{% leaflet_marker lat=51.505, lng=-0.09 %}
+{% leaflet_marker lat=51.507, lng=-0.1 icon_url="/static/marker.png" %}
+{% endblock %}

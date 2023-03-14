@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+	{% load static %}
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<title></title>
+</head>
+<body>
+	{% csrf_token %} 
+	<div class="headings">
+		<h1>Feed the Need</h1>
+	</div>
+                {% block content %}
+
+
+                 {% endblock content %}
+</body>
+</html>
